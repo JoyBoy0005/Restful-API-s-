@@ -4,14 +4,17 @@ const app = express();
 const mongoose = require('mongoose');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 // Connect to MongoDB
-// mongoose.connect('mongodb+srv://MrJoyBoy:THEPRINCE@05@lux-softech.gy3ao.mongodb.net/?retryWrites=true&w=majority&appName=Lux-SofTech');
-// Connect to MongoDB
 
 //To fix the DepricationWanring problem
 // mongoose.Promise = global.Promise;
 
 require('dotenv').config(); // Load environment variables
-const uri = `mongodb+srv://MrJoyBoy:${encodeURIComponent('THEPRINCE@05')}@lux-softech.gy3ao.mongodb.net/myDatabase?retryWrites=true&w=majority`;
+const username = process.env.MONGO_USERNAME;
+const password = encodeURIComponent(process.env.MONGO_PASSWORD);
+const cluster = process.env.MONGO_CLUSTER;
+const database = process.env.MONGO_DATABASE;
+const uri = `mongodb+srv://${username}:${password}@${cluster}/${database}?retryWrites=true&w=majority`;
+
 
 mongoose.connect(uri)
     .then(() => console.log('Connected to MongoDB successfully'))
